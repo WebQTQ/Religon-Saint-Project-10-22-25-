@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archangel Gabriel | Religion Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #08122a, #141c3b, #1e2b55);
+      background-attachment: fixed;
+      color: #e9ecff;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 10px;
+      transition: background 0.6s ease, color 0.3s ease;
+    }
+
+    /* Floating stars */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      width: 2px; height: 2px;
+      animation: float 40s linear infinite;
+    }
+    @keyframes float {
+      from { transform: translateY(0); opacity: 0.9; }
+      to { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .page {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+    .glass:hover {
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      flex: 1 1 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 35px 20px;
+      text-align: center;
+    }
+    .sidebar img {
+      width: 130px; height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 25px rgba(173, 201, 255, 0.4);
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+    .sidebar img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 35px rgba(188, 219, 255, 0.55);
+    }
+    .sidebar h1 {
+      font-size: 2em;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.15);
+    }
+    .tagline {
+      font-size: 0.95em;
+      color: #b8cbff;
+      margin-bottom: 25px;
+    }
+
+    .info-block {
+      margin-top: 15px;
+      text-align: left;
+      width: 100%;
+    }
+    .info-block p {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin: 8px 0;
+      font-size: 0.95rem;
+      color: #eef3ff;
+      transition: all 0.25s ease;
+    }
+    .info-block p:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.02);
+    }
+
+    /* Main content */
+    .content {
+      flex: 2 1 600px;
+      padding: 35px 40px;
+    }
+    .section { margin-bottom: 40px; }
+
+    .section h2 {
+      font-size: 1.6em;
+      color: #ffffff;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 5px;
+      text-shadow: 0 0 12px rgba(255,255,255,0.1);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(185, 205, 255, 0.25);
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #f4f7ff;
+      font-size: 1.1em;
+    }
+    p {
+      line-height: 1.7;
+      color: #dfe6ff;
+      font-size: 0.96rem;
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      font-size: 0.85rem;
+      color: #b7c4ff;
+      margin-top: 40px;
+      opacity: 0.85;
+    }
+
+    /* Settings Button */
+    .settings-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      padding: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.1em;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .settings-btn:hover {
+      background: rgba(255,255,255,0.15);
+      transform: rotate(25deg);
+    }
+
+    /* Settings Menu */
+    .settings-menu {
+      position: fixed;
+      top: 70px;
+      right: 25px;
+      width: 220px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 15px;
+      backdrop-filter: blur(15px);
+      padding: 15px;
+      display: none;
+      z-index: 3;
+    }
+    .settings-menu label {
+      font-size: 0.9em;
+      display: block;
+      margin: 6px 0 3px;
+    }
+    .settings-menu input[type="color"],
+    .settings-menu input[type="range"],
+    .settings-menu select {
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: none;
+      padding: 5px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    @media (max-width: 850px) {
+      .content { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <!-- Settings Button -->
+  <div class="settings-btn" id="settingsBtn">⚙️</div>
+
+  <!-- Settings Menu -->
+  <div class="settings-menu" id="settingsMenu">
+    <label>Theme Color:</label>
+    <input type="color" id="themeColor" value="#08122a">
+    <label>Text Size:</label>
+    <input type="range" id="textSize" min="14" max="22" value="16">
+    <label>Text Boldness:</label>
+    <select id="textWeight">
+      <option value="400">Normal</option>
+      <option value="600">Semi-Bold</option>
+      <option value="700">Bold</option>
+    </select>
+  </div>
+
+  <div class="page">
+    <!-- Sidebar -->
+    <div class="sidebar glass">
+      <img src="https://i.pinimg.com/originals/b6/2e/c8/b62ec8304710d86b474aaf9f600d77fe.jpg" alt="Archangel Gabriel">
+      <h1>Archangel Gabriel</h1>
+      <div class="tagline">Heaven’s Messenger • Patron of Communication</div>
+
+      <div class="info-block">
+        <p><strong>Full Name:</strong> Saint Gabriel the Archangel</p>
+        <p><strong>Origin:</strong> Heavenly realm; appeared in Israel & Babylon</p>
+        <p><strong>Feast Day:</strong> September 29</p>
+        <p><strong>Patron Of:</strong> Messengers, postal & communication workers</p>
+        <p><strong>Symbol:</strong> Trumpet or lily, representing divine messages and purity</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content glass">
+      <div class="section">
+        <h2>Overview</h2>
+        <div class="card">
+          <p>Gabriel is one of the three Archangels mentioned in the Bible, alongside Michael and Raphael. He is most well-known as the messenger of God, appearing in several key moments throughout Scripture. The name “Gabriel” means “God is my strength.”</p>
+          <p>He is not a human being but a spiritual being created by God. Even though he doesn’t have a physical body, Gabriel often appears in human form when delivering messages to people in the Bible. His presence is usually described as bright and awe-inspiring, reminding people that his message comes directly from God.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Major Events</h2>
+        <div class="card">
+          <h3>1. Messenger to Daniel</h3>
+          <p>Gabriel explained Daniel’s visions about the future of Israel and the coming of the Messiah (Daniel 8–9). This showed his role as a guide and interpreter of divine plans.</p>
+        </div>
+        <div class="card">
+          <h3>2. Annunciation to Mary</h3>
+          <p>Gabriel appeared to the Virgin Mary to announce that she would give birth to Jesus, the Son of God (Luke 1:26–38). This is one of the most famous moments in the Bible, celebrated every year as the Annunciation.</p>
+        </div>
+        <div class="card">
+          <h3>3. Revelation to Zechariah</h3>
+          <p>He appeared to Zechariah, the father of John the Baptist, to announce that his wife Elizabeth would have a son who would prepare the way for Jesus (Luke 1:11–20).</p>
+        </div>
+        <div class="card">
+          <h3>4. Other Appearances</h3>
+          <p>Although not mentioned by name, Gabriel is believed by some to have been the angel who announced Jesus’ birth to the shepherds, continuing his role as the voice of God’s good news.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Vocation & Faithfulness</h2>
+        <div class="card">
+          <p>Gabriel’s mission is to bring God’s word to humanity. His faithfulness is shown in his obedience and humility. He doesn’t act for attention or power, but always speaks what God commands. This makes him a model of trust and service to God’s will.</p>
+          <p>In a way, Gabriel’s example encourages people today to be “messengers” of truth and kindness — to share hope and faith with others in our own lives.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Challenges & Sacrifices</h2>
+        <div class="card">
+          <p>Even though angels don’t experience human struggles, Gabriel’s role still comes with challenges. He often had to bring difficult messages, like warnings of judgment or events people didn’t understand.</p>
+          <p>Still, he carried out every mission with courage and loyalty, showing that faith means doing what’s right even when it’s not easy or popular.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Universal Call to Holiness</h2>
+        <div class="card">
+          <p>Gabriel shows that holiness is not only about prayer but also about action and purpose. He teaches us to:</p>
+          <p><strong>Listen:</strong> Stay open to God’s guidance, even when it’s unexpected.</p>
+          <p><strong>Trust:</strong> Have faith that God’s plan is good, even when we don’t see the full picture.</p>
+          <p><strong>Act:</strong> Be ready to respond to God’s call with courage, just like Gabriel did.</p>
+          <p>Through his example, Gabriel reminds us that every person can be a messenger of hope in their own way.</p>
+        </div>
+      </div>
+
+      <footer>Archangel Gabriel | Made by <strong>Miles Gonzalez</strong></footer>
+    </div>
+  </div>
+
+  <script>
+    // Floating stars
+    const stars = document.getElementById('stars');
+    for (let i = 0; i < 45; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDuration = 30 + Math.random() * 30 + 's';
+      s.style.opacity = 0.5 + Math.random() * 0.5;
+      stars.appendChild(s);
+    }
+
+    // Settings panel
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsMenu = document.getElementById('settingsMenu');
+    settingsBtn.onclick = () => {
+      settingsMenu.style.display = settingsMenu.style.display === 'block' ? 'none' : 'block';
+    };
+
+    // Theme color
+    document.getElementById('themeColor').oninput = e => {
+      document.body.style.background = `radial-gradient(circle at top, ${e.target.value}, #141c3b, #1e2b55)`;
+    };
+
+    // Text size
+    document.getElementById('textSize').oninput = e => {
+      document.body.style.fontSize = e.target.value + 'px';
+    };
+
+    // Boldness
+    document.getElementById('textWeight').onchange = e => {
+      document.body.style.fontWeight = e.target.value;
+    };
+  </script>
+</body>
+</html>
